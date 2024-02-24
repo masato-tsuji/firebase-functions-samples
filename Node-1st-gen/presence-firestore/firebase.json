@@ -1,6 +1,0 @@
-{
-  "functions": {
-    "codebase": "presence-firestore"
-  },
-  "hosting": {"public": "public"}
-}

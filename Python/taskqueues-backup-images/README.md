@@ -1,1 +1,0 @@
-# taskqueues-backup-images

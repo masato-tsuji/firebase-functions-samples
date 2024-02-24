@@ -1,8 +1,0 @@
-{
-  "functions": {
-    "codebase": "thumbnails",
-    "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint"
-    ]
-  }
-}
