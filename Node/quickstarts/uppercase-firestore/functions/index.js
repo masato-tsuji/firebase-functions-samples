@@ -33,15 +33,17 @@ initializeApp();
 // Take the text parameter passed to this HTTP endpoint and insert it into
 // Firestore under the path /messages/:documentId/original
 // [START addmessageTrigger]
-exports.addmessage = onRequest(async (req, res) => {
+exports.addmessage = onRequest(
+  {cors: [/firebase\.com$/, "https://masato-tsuji.github.io"]},
+  async (req, res) => {
   // [END addmessageTrigger]
   // Grab the text parameter.
   const original = req.query.text;
   // [START adminSdkAdd]
   // Push the new message into Firestore using the Firebase Admin SDK.
   const writeResult = await getFirestore()
-      .collection("messages")
-      .add({original: original});
+      .collection("uppercase-messages")
+      .add({original: original, date: new Date()});
   // Send back a message that we've successfully written the message
   res.json({result: `Message with ID: ${writeResult.id} added.`});
   // [END adminSdkAdd]
@@ -53,7 +55,8 @@ exports.addmessage = onRequest(async (req, res) => {
 // and saves an uppercased version of the message
 // to /messages/:documentId/uppercase
 // [START makeuppercaseTrigger]
-exports.makeuppercase = onDocumentCreated("/messages/{documentId}", (event) => {
+// documentが作成された時のイベント
+exports.makeuppercase = onDocumentCreated("/uppercase-messages/{documentId}", (event) => {
   // [END makeuppercaseTrigger]
   // [START makeUppercaseBody]
   // Grab the current value of what was written to Firestore.

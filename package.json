@@ -25,5 +25,8 @@
         "@firebase/app-types"
       ]
     }
+  },
+  "volta": {
+    "node": "18.19.1"
   }
 }
